@@ -36,8 +36,7 @@ namespace DIM_API.Data
             modelBuilder.Entity<CampaniaMascota>().HasKey(ba => new { ba.MascotaID, ba.CampaniaID });
             modelBuilder.Entity<CampaniaRaza>().HasKey(ba => new { ba.CampaniaID, ba.RazaID });
             modelBuilder.Entity<VeterinarioMascota>().HasKey(ba => new { ba.MascotaID, ba.RenglonVisita });
-
-
+            modelBuilder.Entity<Vacunacion>().HasKey(ba => new { ba.MascotaID, ba.RenglonVacuna });
         }
 
         public DbSet<DIM_API.Models.MedicamentosMascotas> MedicamentosMascotas { get; set; }
@@ -51,6 +50,10 @@ namespace DIM_API.Data
         public DbSet<DIM_API.Models.TipoVisita> TipoVisita { get; set; }
 
         public DbSet<DIM_API.Models.VeterinarioMascota> VeterinarioMascota { get; set; }
+
+        public DbSet<DIM_API.Models.TipoVacuna> TipoVacuna { get; set; }
+
+        public DbSet<DIM_API.Models.Vacunacion> Vacunacion { get; set; }
 
 
 

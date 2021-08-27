@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Thursday, August 26, 2021 00:03:37
+ * Date Created : Thursday, August 26, 2021 22:09:55
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -235,6 +235,26 @@ ELSE
 go
 
 /* 
+ * TABLE: TipoVacuna 
+ */
+
+CREATE TABLE TipoVacuna(
+    VacunaID       int             NOT NULL,
+    Nombre         varchar(50)     NOT NULL,
+    Descripcion    varchar(100)    NULL,
+    CONSTRAINT PK20 PRIMARY KEY NONCLUSTERED (VacunaID)
+)
+go
+
+
+
+IF OBJECT_ID('TipoVacuna') IS NOT NULL
+    PRINT '<<< CREATED TABLE TipoVacuna >>>'
+ELSE
+    PRINT '<<< FAILED CREATING TABLE TipoVacuna >>>'
+go
+
+/* 
  * TABLE: TipoVisita 
  */
 
@@ -287,11 +307,15 @@ go
  */
 
 CREATE TABLE Vacunacion(
-    MascotaID            bigint      NOT NULL,
-    RenglonVacuna        int         NOT NULL,
-    FechaRevacunacion    datetime    NULL,
-    Fecha                datetime    NOT NULL,
-    Tipo                 smallint    NOT NULL,
+    MascotaID            bigint         NOT NULL,
+    RenglonVacuna        int            NOT NULL,
+    FechaRevacunacion    datetime       NULL,
+    FechaAplicacion      datetime       NOT NULL,
+    CodigoSENASA         varchar(50)    NOT NULL,
+    Lote                 varchar(20)    NULL,
+    Serie                varchar(50)    NULL,
+    Dosis                varchar(50)    NULL,
+    VacunaID             int            NOT NULL,
     CONSTRAINT PK17 PRIMARY KEY NONCLUSTERED (MascotaID, RenglonVacuna)
 )
 go
@@ -457,6 +481,11 @@ go
 ALTER TABLE Vacunacion ADD CONSTRAINT RefMascota21 
     FOREIGN KEY (MascotaID)
     REFERENCES Mascota(MascotaID)
+go
+
+ALTER TABLE Vacunacion ADD CONSTRAINT RefTipoVacuna41 
+    FOREIGN KEY (VacunaID)
+    REFERENCES TipoVacuna(VacunaID)
 go
 
 

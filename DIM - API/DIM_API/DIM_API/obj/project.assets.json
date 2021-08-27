@@ -8479,11 +8479,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Christian\\Desktop\\DIM - API\\DIM_API\\DIM_API\\DIM_API.csproj",
+      "projectUniqueName": "C:\\Users\\Christian\\Desktop\\GIT\\DIM-API\\DIM - API\\DIM_API\\DIM_API\\DIM_API.csproj",
       "projectName": "DIM_API",
-      "projectPath": "C:\\Users\\Christian\\Desktop\\DIM - API\\DIM_API\\DIM_API\\DIM_API.csproj",
+      "projectPath": "C:\\Users\\Christian\\Desktop\\GIT\\DIM-API\\DIM - API\\DIM_API\\DIM_API\\DIM_API.csproj",
       "packagesPath": "C:\\Users\\Christian\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Christian\\Desktop\\DIM - API\\DIM_API\\DIM_API\\obj\\",
+      "outputPath": "C:\\Users\\Christian\\Desktop\\GIT\\DIM-API\\DIM - API\\DIM_API\\DIM_API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Christian\\AppData\\Roaming\\NuGet\\NuGet.Config",
