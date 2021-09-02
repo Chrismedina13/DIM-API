@@ -18,12 +18,16 @@ namespace DIM_API.Models
         public Int16 Sexo { get; set; }
         public Int16 CondicionDeSalud { get; set; }
         public string OtrosDatosDeSalud { get; set; }
-        public int Edad { get; set; }
         public Int16 Tamanio { get; set; }
         public string Nombre { get; set; }
         public int UsuarioID { get; set; }
         public string Especie { get; set; }
         public string RazaID { get; set; }
+        public string Imagen { get; set; }
+        public int? Peso { get; set; }
+        public string CertificadoAntirrabica { get; set; }
+        public string SeguroResponsabilidadCivil { get; set; }
+        public string ImagenChapita { get; set; }
 
     }
 }

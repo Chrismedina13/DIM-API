@@ -20,7 +20,8 @@ namespace DIM_API.Models
         public Int16 TipoDocumento { get; set; }
         public Decimal NumeroDocumento { get; set; }
         public int CodigoVerificacion { get; set; }
-        
+        public string Telefono { get; set; }
+        public string ImagenDNI { get; set; }
 
     }
 }

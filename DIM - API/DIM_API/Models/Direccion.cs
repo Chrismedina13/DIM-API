@@ -16,6 +16,7 @@ namespace DIM_API.Models
         public string Provincia { get; set; }
         public Int64? CampaniaID { get; set; }
         public int? UsuarioID { get; set; }
+        public long? MascotaID { get; set; }
 
     }
 }

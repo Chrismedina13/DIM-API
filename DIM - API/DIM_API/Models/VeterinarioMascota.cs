@@ -11,5 +11,11 @@ namespace DIM_API.Models
         public int RenglonVisita { get; set; }
         public string TipoID { get; set; }
         public int VeterinarioID { get; set; }
+        public DateTime FechaConsulta { get; set; }
+        public string Descripcion { get; set; }
+        public int? Peso { get; set; }
+        public byte ReportoENO { get; set; }
+
+
     }
 }

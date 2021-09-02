@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rPUSKx/yrPej7Irn392pV1vg7b01uHW0OAkf/7tr8Zw0YoOZX+a+iKSLIe7a13lUhpusvifhvPKja1imhp4sHg==",
+  "dgSpecHash": "610TtApcO5a3jPVobIrkLCutZW0kg8YlwGmH2CbQQ4nMmouSKeIDYqBmxCdsg/Vrn5cJ7wL50b63ikpaDTlwyw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Christian\\Desktop\\GIT\\DIM-API\\DIM - API\\DIM_API\\DIM_API\\DIM_API.csproj",
+  "projectFilePath": "C:\\Users\\Christian\\Desktop\\GIT\\DIM-API\\DIM - API\\DIM_API\\DIM_API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Christian\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Christian\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",

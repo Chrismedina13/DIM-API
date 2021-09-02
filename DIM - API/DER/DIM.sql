@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Thursday, August 26, 2021 22:09:55
+ * Date Created : Tuesday, August 31, 2021 23:04:16
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -82,6 +82,7 @@ CREATE TABLE Direccion(
     Provincia       varchar(30)      NOT NULL,
     CampaniaID      bigint           NULL,
     UsuarioID       int              NULL,
+    MascotaID       bigint           NULL,
     CONSTRAINT PK18 PRIMARY KEY NONCLUSTERED (DireccionID)
 )
 go
@@ -126,6 +127,7 @@ CREATE TABLE Fallecimiento(
     Fecha                                 datetime        NOT NULL,
     Causa                                 varchar(150)    NOT NULL,
     RiesgoEpidemiologico                  tinyint         NOT NULL,
+    RenglonVisita                         int             NULL,
     CONSTRAINT PK9 PRIMARY KEY NONCLUSTERED (MascotaID)
 )
 go
@@ -143,24 +145,27 @@ go
  */
 
 CREATE TABLE Mascota(
-    MascotaID                   bigint            NOT NULL,
-    Imagen                      varbinary(max)    NULL,
-    FechaDeNacimiento           datetime          NULL,
-    FechaValidacion             datetime          NULL,
-    NroIdentificadorCriadero    varchar(30)       NULL,
-    CodigoDeChip                varchar(30)       NULL,
-    DIeta                       varchar(250)      NULL,
-    OtrosMedicamentos           varchar(100)      NULL,
-    Pelaje                      varchar(30)       NULL,
-    Sexo                        smallint          NOT NULL,
-    CondicionDeSalud            smallint          NOT NULL,
-    OtrosDatosDeSalud           varchar(250)      NULL,
-    Edad                        int               NOT NULL,
-    Tamanio                     smallint          NOT NULL,
-    Nombre                      varchar(50)       NOT NULL,
-    UsuarioID                   int               NOT NULL,
-    Especie                     varchar(30)       NOT NULL,
-    RazaID                      varchar(30)       NOT NULL,
+    MascotaID                     bigint            NOT NULL,
+    ImagenChapita                 varbinary(max)    NULL,
+    Peso                          int               NULL,
+    Imagen                        varbinary(max)    NULL,
+    FechaDeNacimiento             datetime          NULL,
+    FechaValidacion               datetime          NULL,
+    NroIdentificadorCriadero      varchar(30)       NULL,
+    CodigoDeChip                  varchar(30)       NULL,
+    DIeta                         varchar(250)      NULL,
+    OtrosMedicamentos             varchar(100)      NULL,
+    Pelaje                        varchar(30)       NULL,
+    Sexo                          smallint          NOT NULL,
+    CondicionDeSalud              smallint          NOT NULL,
+    OtrosDatosDeSalud             varchar(250)      NULL,
+    Tamanio                       smallint          NOT NULL,
+    CertificadoAntirrabica        varbinary(max)    NULL,
+    SeguroResponsabilidadCivil    varbinary(max)    NULL,
+    Nombre                        varchar(50)       NOT NULL,
+    UsuarioID                     int               NOT NULL,
+    Especie                       varchar(30)       NOT NULL,
+    RazaID                        varchar(30)       NOT NULL,
     CONSTRAINT PK3 PRIMARY KEY NONCLUSTERED (MascotaID)
 )
 go
@@ -198,10 +203,11 @@ go
  */
 
 CREATE TABLE MedicamentosMascotas(
-    MascotaID       bigint            NOT NULL,
-    MedicamentID    varchar(50)       NOT NULL,
-    Dosis           decimal(10, 4)    NOT NULL,
-    Frecuencia      time(7)           NOT NULL,
+    MascotaID        bigint            NOT NULL,
+    MedicamentID     varchar(50)       NOT NULL,
+    Dosis            decimal(10, 4)    NOT NULL,
+    Frecuencia       time(7)           NOT NULL,
+    RenglonVisita    int               NULL,
     CONSTRAINT PK19 PRIMARY KEY NONCLUSTERED (MascotaID, MedicamentID)
 )
 go
@@ -284,6 +290,8 @@ CREATE TABLE Usuarios(
     FechaConfirmacionAlta    datetime          NULL,
     Nombre                   varchar(50)       NOT NULL,
     TipoUsuario              varchar(3)        NOT NULL,
+    Telefono                 varchar(20)       NOT NULL,
+    ImagenDNI                varbinary(max)    NULL,
     FechaAlta                datetime          NOT NULL,
     Password                 varchar(100)      NOT NULL,
     Email                    varchar(50)       NOT NULL,
@@ -316,6 +324,7 @@ CREATE TABLE Vacunacion(
     Serie                varchar(50)    NULL,
     Dosis                varchar(50)    NULL,
     VacunaID             int            NOT NULL,
+    RenglonVisita        int            NULL,
     CONSTRAINT PK17 PRIMARY KEY NONCLUSTERED (MascotaID, RenglonVacuna)
 )
 go
@@ -353,10 +362,14 @@ go
  */
 
 CREATE TABLE VeterinarioMascota(
-    MascotaID        bigint         NOT NULL,
-    RenglonVisita    int            NOT NULL,
-    TipoID           varchar(10)    NOT NULL,
-    VeterinarioID    int            NOT NULL,
+    MascotaID        bigint          NOT NULL,
+    RenglonVisita    int             NOT NULL,
+    FechaConsulta    datetime        NOT NULL,
+    Descripcion      varchar(200)    NULL,
+    Peso             int             NULL,
+    ReportoENO       tinyint         NOT NULL,
+    TipoID           varchar(10)     NOT NULL,
+    VeterinarioID    int             NOT NULL,
     CONSTRAINT PK14 PRIMARY KEY NONCLUSTERED (MascotaID, RenglonVisita)
 )
 go
@@ -423,6 +436,11 @@ ALTER TABLE Direccion ADD CONSTRAINT RefUsuarios38
     REFERENCES Usuarios(UsuarioID)
 go
 
+ALTER TABLE Direccion ADD CONSTRAINT RefMascota42 
+    FOREIGN KEY (MascotaID)
+    REFERENCES Mascota(MascotaID)
+go
+
 
 /* 
  * TABLE: Especie 
@@ -441,6 +459,11 @@ go
 ALTER TABLE Fallecimiento ADD CONSTRAINT RefMascota14 
     FOREIGN KEY (MascotaID)
     REFERENCES Mascota(MascotaID)
+go
+
+ALTER TABLE Fallecimiento ADD CONSTRAINT RefVeterinarioMascota45 
+    FOREIGN KEY (MascotaID, RenglonVisita)
+    REFERENCES VeterinarioMascota(MascotaID, RenglonVisita)
 go
 
 
@@ -473,19 +496,29 @@ ALTER TABLE MedicamentosMascotas ADD CONSTRAINT RefMedicamento24
     REFERENCES Medicamento(MedicamentoID)
 go
 
+ALTER TABLE MedicamentosMascotas ADD CONSTRAINT RefVeterinarioMascota46 
+    FOREIGN KEY (MascotaID, RenglonVisita)
+    REFERENCES VeterinarioMascota(MascotaID, RenglonVisita)
+go
+
 
 /* 
  * TABLE: Vacunacion 
  */
+
+ALTER TABLE Vacunacion ADD CONSTRAINT RefTipoVacuna41 
+    FOREIGN KEY (VacunaID)
+    REFERENCES TipoVacuna(VacunaID)
+go
 
 ALTER TABLE Vacunacion ADD CONSTRAINT RefMascota21 
     FOREIGN KEY (MascotaID)
     REFERENCES Mascota(MascotaID)
 go
 
-ALTER TABLE Vacunacion ADD CONSTRAINT RefTipoVacuna41 
-    FOREIGN KEY (VacunaID)
-    REFERENCES TipoVacuna(VacunaID)
+ALTER TABLE Vacunacion ADD CONSTRAINT RefVeterinarioMascota47 
+    FOREIGN KEY (MascotaID, RenglonVisita)
+    REFERENCES VeterinarioMascota(MascotaID, RenglonVisita)
 go
 
 

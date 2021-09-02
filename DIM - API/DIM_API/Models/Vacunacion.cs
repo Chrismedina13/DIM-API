@@ -16,6 +16,8 @@ namespace DIM_API.Models
         public string Serie { get; set; }
         public string Dosis { get; set; }
         public int VacunaID { get; set; }
+        public int? RenglonVisita { get; set; }
+
 
 
     }

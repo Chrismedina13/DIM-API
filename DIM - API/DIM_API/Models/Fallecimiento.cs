@@ -17,6 +17,7 @@ namespace DIM_API.Models
         public DateTime Fecha { get; set; }
         public string Causa { get; set; }
         public byte RiesgoEpidemiologico { get; set; }
+        public int? RenglonVisita { get; set; }
 
     }
 }
