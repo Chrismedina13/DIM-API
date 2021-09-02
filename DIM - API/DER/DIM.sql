@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Tuesday, August 31, 2021 23:04:16
+ * Date Created : Wednesday, September 01, 2021 22:50:42
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -145,27 +145,27 @@ go
  */
 
 CREATE TABLE Mascota(
-    MascotaID                     bigint            NOT NULL,
-    ImagenChapita                 varbinary(max)    NULL,
-    Peso                          int               NULL,
-    Imagen                        varbinary(max)    NULL,
-    FechaDeNacimiento             datetime          NULL,
-    FechaValidacion               datetime          NULL,
-    NroIdentificadorCriadero      varchar(30)       NULL,
-    CodigoDeChip                  varchar(30)       NULL,
-    DIeta                         varchar(250)      NULL,
-    OtrosMedicamentos             varchar(100)      NULL,
-    Pelaje                        varchar(30)       NULL,
-    Sexo                          smallint          NOT NULL,
-    CondicionDeSalud              smallint          NOT NULL,
-    OtrosDatosDeSalud             varchar(250)      NULL,
-    Tamanio                       smallint          NOT NULL,
-    CertificadoAntirrabica        varbinary(max)    NULL,
-    SeguroResponsabilidadCivil    varbinary(max)    NULL,
-    Nombre                        varchar(50)       NOT NULL,
-    UsuarioID                     int               NOT NULL,
-    Especie                       varchar(30)       NOT NULL,
-    RazaID                        varchar(30)       NOT NULL,
+    MascotaID                     bigint          NOT NULL,
+    ImagenChapita                 varchar(max)    NULL,
+    Peso                          int             NULL,
+    Imagen                        varchar(max)    NULL,
+    FechaDeNacimiento             datetime        NULL,
+    FechaValidacion               datetime        NULL,
+    NroIdentificadorCriadero      varchar(30)     NULL,
+    CodigoDeChip                  varchar(30)     NULL,
+    DIeta                         varchar(250)    NULL,
+    OtrosMedicamentos             varchar(100)    NULL,
+    Pelaje                        varchar(30)     NULL,
+    Sexo                          smallint        NOT NULL,
+    CondicionDeSalud              smallint        NOT NULL,
+    OtrosDatosDeSalud             varchar(250)    NULL,
+    Tamanio                       smallint        NOT NULL,
+    CertificadoAntirrabica        varchar(max)    NULL,
+    SeguroResponsabilidadCivil    varchar(max)    NULL,
+    Nombre                        varchar(50)     NOT NULL,
+    UsuarioID                     int             NOT NULL,
+    Especie                       varchar(30)     NOT NULL,
+    RazaID                        varchar(30)     NOT NULL,
     CONSTRAINT PK3 PRIMARY KEY NONCLUSTERED (MascotaID)
 )
 go
@@ -291,7 +291,7 @@ CREATE TABLE Usuarios(
     Nombre                   varchar(50)       NOT NULL,
     TipoUsuario              varchar(3)        NOT NULL,
     Telefono                 varchar(20)       NOT NULL,
-    ImagenDNI                varbinary(max)    NULL,
+    ImagenDNI                varchar(max)      NULL,
     FechaAlta                datetime          NOT NULL,
     Password                 varchar(100)      NOT NULL,
     Email                    varchar(50)       NOT NULL,
