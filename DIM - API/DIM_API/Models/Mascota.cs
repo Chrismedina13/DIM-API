@@ -21,7 +21,6 @@ namespace DIM_API.Models
         public Int16 Tamanio { get; set; }
         public string Nombre { get; set; }
         public int UsuarioID { get; set; }
-        public string Especie { get; set; }
         public string RazaID { get; set; }
         public string Imagen { get; set; }
         public int? Peso { get; set; }

@@ -11,7 +11,6 @@ namespace DIM_API.Models
     {
 
         public string EspecieID { get; set; }
-        public string RazaID { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
 

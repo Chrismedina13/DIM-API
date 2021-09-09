@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Wednesday, September 01, 2021 22:50:42
+ * Date Created : Wednesday, September 08, 2021 23:12:28
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -101,10 +101,9 @@ go
 
 CREATE TABLE Especie(
     EspecieID      varchar(30)     NOT NULL,
-    RazaID         varchar(30)     NOT NULL,
     Nombre         varchar(50)     NOT NULL,
-    Descripcion    varchar(150)    NULL,
-    CONSTRAINT PK10 PRIMARY KEY NONCLUSTERED (EspecieID, RazaID)
+    Descripcion    varchar(100)    NULL,
+    CONSTRAINT PK10 PRIMARY KEY NONCLUSTERED (EspecieID)
 )
 go
 
@@ -122,6 +121,8 @@ go
 
 CREATE TABLE Fallecimiento(
     MascotaID                             bigint          NOT NULL,
+    Modo                                  smallint        NULL,
+    Certificado                           varchar(max)    NULL,
     Lugar                                 varchar(100)    NULL,
     EspecificacionRiesgoEpidemiologico    varchar(100)    NULL,
     Fecha                                 datetime        NOT NULL,
@@ -164,7 +165,6 @@ CREATE TABLE Mascota(
     SeguroResponsabilidadCivil    varchar(max)    NULL,
     Nombre                        varchar(50)     NOT NULL,
     UsuarioID                     int             NOT NULL,
-    Especie                       varchar(30)     NOT NULL,
     RazaID                        varchar(30)     NOT NULL,
     CONSTRAINT PK3 PRIMARY KEY NONCLUSTERED (MascotaID)
 )
@@ -228,6 +228,7 @@ CREATE TABLE Raza(
     RazaID             varchar(30)     NOT NULL,
     Descripcion        varchar(100)    NULL,
     EsRazaPeligrosa    tinyint         NULL,
+    EspecieID          varchar(30)     NOT NULL,
     CONSTRAINT PK4 PRIMARY KEY NONCLUSTERED (RazaID)
 )
 go
@@ -416,7 +417,7 @@ ALTER TABLE CampaniaRaza ADD CONSTRAINT RefCampania12
     REFERENCES Campania(CampaniaID)
 go
 
-ALTER TABLE CampaniaRaza ADD CONSTRAINT RefRaza13 
+ALTER TABLE CampaniaRaza ADD CONSTRAINT RefRaza51 
     FOREIGN KEY (RazaID)
     REFERENCES Raza(RazaID)
 go
@@ -439,16 +440,6 @@ go
 ALTER TABLE Direccion ADD CONSTRAINT RefMascota42 
     FOREIGN KEY (MascotaID)
     REFERENCES Mascota(MascotaID)
-go
-
-
-/* 
- * TABLE: Especie 
- */
-
-ALTER TABLE Especie ADD CONSTRAINT RefRaza26 
-    FOREIGN KEY (RazaID)
-    REFERENCES Raza(RazaID)
 go
 
 
@@ -476,9 +467,9 @@ ALTER TABLE Mascota ADD CONSTRAINT RefUsuarios10
     REFERENCES Usuarios(UsuarioID)
 go
 
-ALTER TABLE Mascota ADD CONSTRAINT RefEspecie25 
-    FOREIGN KEY (Especie, RazaID)
-    REFERENCES Especie(EspecieID, RazaID)
+ALTER TABLE Mascota ADD CONSTRAINT RefRaza50 
+    FOREIGN KEY (RazaID)
+    REFERENCES Raza(RazaID)
 go
 
 
@@ -503,17 +494,27 @@ go
 
 
 /* 
- * TABLE: Vacunacion 
+ * TABLE: Raza 
  */
 
-ALTER TABLE Vacunacion ADD CONSTRAINT RefTipoVacuna41 
-    FOREIGN KEY (VacunaID)
-    REFERENCES TipoVacuna(VacunaID)
+ALTER TABLE Raza ADD CONSTRAINT RefEspecie49 
+    FOREIGN KEY (EspecieID)
+    REFERENCES Especie(EspecieID)
 go
+
+
+/* 
+ * TABLE: Vacunacion 
+ */
 
 ALTER TABLE Vacunacion ADD CONSTRAINT RefMascota21 
     FOREIGN KEY (MascotaID)
     REFERENCES Mascota(MascotaID)
+go
+
+ALTER TABLE Vacunacion ADD CONSTRAINT RefTipoVacuna41 
+    FOREIGN KEY (VacunaID)
+    REFERENCES TipoVacuna(VacunaID)
 go
 
 ALTER TABLE Vacunacion ADD CONSTRAINT RefVeterinarioMascota47 

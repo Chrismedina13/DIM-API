@@ -10,5 +10,6 @@ namespace DIM_API.Models
         public string RazaID { get; set; }
         public string Descripcion { get; set; }
         public byte EsRazaPeligrosa { get; set; }
+        public string EspecieID { get; set; }
     }
 }
