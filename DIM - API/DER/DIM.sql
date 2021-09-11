@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Wednesday, September 08, 2021 23:12:28
+ * Date Created : Saturday, September 11, 2021 17:07:17
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -298,7 +298,7 @@ CREATE TABLE Usuarios(
     Email                    varchar(50)       NOT NULL,
     TipoDocumento            smallint          NOT NULL,
     NumeroDocumento          decimal(13, 0)    NOT NULL,
-    CodigoVerificacion       int               NOT NULL,
+    CodigoVerificacion       varchar(6)        NOT NULL,
     CONSTRAINT PK1 PRIMARY KEY NONCLUSTERED (UsuarioID)
 )
 go
