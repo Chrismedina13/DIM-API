@@ -18,6 +18,8 @@ namespace DIM_API.Models
         public string Causa { get; set; }
         public byte RiesgoEpidemiologico { get; set; }
         public int? RenglonVisita { get; set; }
+        public string Modo { get; set; }
+        public string Certificado { get; set; }
 
     }
 }

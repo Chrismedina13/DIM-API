@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Saturday, September 11, 2021 17:07:17
+ * Date Created : Tuesday, September 28, 2021 22:55:39
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -121,7 +121,7 @@ go
 
 CREATE TABLE Fallecimiento(
     MascotaID                             bigint          NOT NULL,
-    Modo                                  smallint        NULL,
+    Modo                                  varchar(50)     NULL,
     Certificado                           varchar(max)    NULL,
     Lugar                                 varchar(100)    NULL,
     EspecificacionRiesgoEpidemiologico    varchar(100)    NULL,
@@ -287,6 +287,7 @@ go
 
 CREATE TABLE Usuarios(
     UsuarioID                int               NOT NULL,
+    Imagen                   varchar(max)      NULL,
     Apellido                 varchar(50)       NOT NULL,
     FechaConfirmacionAlta    datetime          NULL,
     Nombre                   varchar(50)       NOT NULL,

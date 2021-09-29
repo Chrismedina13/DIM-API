@@ -22,6 +22,6 @@ namespace DIM_API.Models
         public string CodigoVerificacion { get; set; }
         public string Telefono { get; set; }
         public string ImagenDNI { get; set; }
-
+        public string Imagen { get; set; }
     }
 }
