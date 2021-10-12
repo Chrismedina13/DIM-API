@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
 using System.Net;
+using DIM_API.Managers;
 
 namespace DIM_API.Controllers
 {
@@ -29,6 +30,11 @@ namespace DIM_API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Usuarios>>> GetUsuarios()
         {
+            var usuarios = await _context.Usuarios.ToListAsync();
+            foreach (Usuarios usua in usuarios) { 
+                usua.Password = SecurityManager.DesencriptarTexto(usua.Password);
+            }
+
             return await _context.Usuarios.ToListAsync();
         }
 
@@ -37,6 +43,7 @@ namespace DIM_API.Controllers
         public async Task<ActionResult<Usuarios>> GetUsuarios(int id)
         {
             var usuarios = await _context.Usuarios.FindAsync(id);
+            usuarios.Password = SecurityManager.DesencriptarTexto(usuarios.Password);
 
             if (usuarios == null)
             {
@@ -85,7 +92,9 @@ namespace DIM_API.Controllers
         public async Task<ActionResult<Usuarios>> PostUsuarios(Usuarios usuarios)
         {
             string codVerificacion = GenerarYEnviarMailConCodigoVerificacion(usuarios.Email,usuarios.Nombre);
+            string Password = SecurityManager.EncriptarTexto(usuarios.Password);
             usuarios.CodigoVerificacion = codVerificacion;
+            usuarios.Password = Password;
             _context.Usuarios.Add(usuarios);
             await _context.SaveChangesAsync();
 
