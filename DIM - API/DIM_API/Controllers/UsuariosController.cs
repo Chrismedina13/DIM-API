@@ -63,8 +63,11 @@ namespace DIM_API.Controllers
             {
                 return BadRequest();
             }
+            
+            usuarios.Password = SecurityManager.EncriptarTexto(usuarios.Password);
 
             _context.Entry(usuarios).State = EntityState.Modified;
+
 
             try
             {
