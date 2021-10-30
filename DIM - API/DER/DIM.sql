@@ -2,7 +2,7 @@
  * ER/Studio Data Architect SQL Code Generation
  * Project :      Model1.DM1
  *
- * Date Created : Tuesday, September 28, 2021 22:55:39
+ * Date Created : Thursday, October 28, 2021 21:33:11
  * Target DBMS : Microsoft SQL Server 2016
  */
 
@@ -13,6 +13,7 @@
 CREATE TABLE Campania(
     CampaniaID          bigint           NOT NULL,
     CuposDisponibles    numeric(3, 0)    NOT NULL,
+    FechaCreacion       datetime         NOT NULL,
     Descripcion         varchar(250)     NOT NULL,
     Tipo                smallint         NOT NULL,
     Nombre              varchar(50)      NOT NULL,

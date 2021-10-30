@@ -14,6 +14,7 @@ namespace DIM_API.Models
         public string Nombre { get; set; }
         public string Contacto { get; set; }
         public int UsuarioID { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
     }
 }
